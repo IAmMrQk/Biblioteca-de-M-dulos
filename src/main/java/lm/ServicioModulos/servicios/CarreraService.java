@@ -9,31 +9,31 @@ import lm.ServicioModulos.modelos.entidad.Carrera;
 import lm.ServicioModulos.modelos.repositorio.CarreraRepositorio;
 
 @Service
-public class CarreraService implements ICarreraService{
-    
+public class CarreraService implements ICarreraService {
+
     @Autowired
-    private CarreraRepositorio CarreraRepositorio;
+    private CarreraRepositorio carreraRepositorio;
 
     @Override
     public List<Carrera> listarCarreras() {
-        return CarreraRepositorio.findAll();
+        return carreraRepositorio.findAll();
     }
 
     @Override
-    public Carrera guardarCarreras(Carrera Carrera) {
+    public Carrera guardarCarreras(Carrera carrera) {
 
-        return CarreraRepositorio.save(Carrera);
+        return carreraRepositorio.save(carrera);
     }
 
     @Override
     public Carrera buscarCarreraId(Integer idCarrera) {
-        Carrera Carrera = CarreraRepositorio.findById(idCarrera).orElse(null);
+        Carrera Carrera = carreraRepositorio.findById(idCarrera).orElse(null);
         return Carrera;
     }
 
     @Override
-    public void eliminarCarreras(Carrera Carrera) {
-        CarreraRepositorio.delete(Carrera);
-        
+    public void eliminarCarreras(Carrera carrera) {
+        carreraRepositorio.delete(carrera);
+
     }
 }

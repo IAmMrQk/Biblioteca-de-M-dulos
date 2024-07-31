@@ -9,7 +9,7 @@ public interface ICarreraService {
 
     public Carrera buscarCarreraId(Integer idCarrera);
 
-    public Carrera guardarCarreras(Carrera Carrera);
+    public Carrera guardarCarreras(Carrera carrera);
 
-    public void eliminarCarreras(Carrera Carrera);
+    public void eliminarCarreras(Carrera carrera);
 }

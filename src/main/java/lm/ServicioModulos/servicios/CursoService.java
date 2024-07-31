@@ -12,28 +12,28 @@ import lm.ServicioModulos.modelos.repositorio.CursosRepositorio;
 public class CursoService implements ICursoService{
     
     @Autowired
-    private CursosRepositorio CursosRepositorio;
+    private CursosRepositorio cursosRepositorio;
 
     @Override
     public List<Cursos> listarCursos() {
-        return CursosRepositorio.findAll();
+        return cursosRepositorio.findAll();
     }
 
     @Override
     public Cursos guardarCurso(Cursos Curso) {
 
-        return CursosRepositorio.save(Curso);
+        return cursosRepositorio.save(Curso);
     }
 
     @Override
     public Cursos buscarCursoId(Integer idCurso) {
-        Cursos Curso = CursosRepositorio.findById(idCurso).orElse(null);
+        Cursos Curso = cursosRepositorio.findById(idCurso).orElse(null);
         return Curso;
     }
 
     @Override
     public void eliminarCursos(Cursos Curso) {
-        CursosRepositorio.delete(Curso);
+        cursosRepositorio.delete(Curso);
         
     }
 }
