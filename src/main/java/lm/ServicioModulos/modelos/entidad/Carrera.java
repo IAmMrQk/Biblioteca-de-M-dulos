@@ -1,9 +1,12 @@
 package lm.ServicioModulos.modelos.entidad;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +20,9 @@ public class Carrera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCarrera;
     private String nombreCarrera;
-    private Cursos cursosIntegrados;
-    private Integer cantSemestre;
+
+    @OneToMany
+    private List<Cursos> cursosIntegrados;
+    private Integer cantidadSemestre;
     
 }

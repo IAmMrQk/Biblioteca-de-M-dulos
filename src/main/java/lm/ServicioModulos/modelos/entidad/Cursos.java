@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 public class Cursos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCusro;
+    private Integer idCurso;
     private String nombreCurso;
-    private Date fecheInicio;
+    private Date fechaInicio;
     private Date fechaFinalizacion;
     private Integer semestreCurso;
     private String contenido;
