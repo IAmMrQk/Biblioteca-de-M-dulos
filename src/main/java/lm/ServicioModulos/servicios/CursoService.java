@@ -24,6 +24,7 @@ public class CursoService implements ICursoService{
 
         return cursosRepositorio.save(Curso);
     }
+    
 
     @Override
     public Cursos buscarCursoId(Integer idCurso) {
@@ -35,5 +36,9 @@ public class CursoService implements ICursoService{
     public void eliminarCursos(Cursos Curso) {
         cursosRepositorio.delete(Curso);
         
+    }
+
+    public List<Cursos> buscarCursosPorIds(List<Integer> ids) {
+        return cursosRepositorio.findAllById(ids);
     }
 }

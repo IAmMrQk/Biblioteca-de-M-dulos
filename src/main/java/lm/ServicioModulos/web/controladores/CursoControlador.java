@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,17 +15,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.stream.Collectors;
 
 import lm.ServicioModulos.modelos.entidad.Cursos;
 
 import lm.ServicioModulos.servicios.CursoService;
 
 @RestController
-//Esto es una API
-@RequestMapping("/Cursos")
+@CrossOrigin("http://localhost:5173")
+@RequestMapping("/api/Cursos")  
 
 public class CursoControlador {
-    
+
     @Autowired
     private CursoService cursoService;
 
@@ -35,26 +37,25 @@ public class CursoControlador {
         return cursos;
     }
 
+
     @PostMapping("/Guardar_Curso")
-    public Cursos crearCurso(@RequestBody Cursos curso){
+    public Cursos crearCurso(@RequestBody Cursos curso) {
 
         var cursoNuevo = cursoService.guardarCurso(curso);
         return cursoNuevo;
     }
 
-    @GetMapping("/{idCurso}")
-    public ResponseEntity <Cursos> obtenerCursoPorId(@PathVariable Integer idCurso){
-
-        Cursos curso = cursoService.buscarCursoId(idCurso);
-
-        if( curso == null){
-            throw new RuntimeException("Curso no encontrado");
-        }
-        return ResponseEntity.ok(curso);
+    @PostMapping("/cursosPorIds")
+    public ResponseEntity<List<Cursos>> obtenerCursosPorIds(@RequestBody List<Integer> ids) {
+        List<Cursos> cursos = ids.stream()
+                                 .map(cursoService::buscarCursoId)
+                                 .filter(curso -> curso != null)
+                                 .collect(Collectors.toList());
+        return ResponseEntity.ok(cursos);
     }
 
     @PutMapping("/Editar_Curso/{idCurso}")
-    public ResponseEntity <Cursos> editarCurso(@PathVariable Integer idCurso, @RequestBody Cursos cursoNuevo){
+    public ResponseEntity<Cursos> editarCurso(@PathVariable Integer idCurso, @RequestBody Cursos cursoNuevo) {
         Cursos curso = cursoService.buscarCursoId(idCurso);
 
         if (curso == null) {
@@ -62,10 +63,8 @@ public class CursoControlador {
         }
 
         curso.setNombreCurso(cursoNuevo.getNombreCurso());
-        curso.setFechaFinalizacion(cursoNuevo.getFechaFinalizacion());
-        curso.setFechaInicio(cursoNuevo.getFechaInicio());
         curso.setSemestreCurso(cursoNuevo.getSemestreCurso());
-        curso.setContenido(cursoNuevo.getContenido());
+        curso.setDocumentos(cursoNuevo.getDocumentos());
 
         cursoService.guardarCurso(curso);
 
@@ -73,7 +72,7 @@ public class CursoControlador {
     }
 
     @DeleteMapping("/Eliminar_Curso/{idCurso}")
-    public ResponseEntity<Map<String, Boolean>> eliminarCurso(@PathVariable Integer idCurso){
+    public ResponseEntity<Map<String, Boolean>> eliminarCurso(@PathVariable Integer idCurso) {
         Cursos curso = cursoService.buscarCursoId(idCurso);
 
         if (curso == null) {

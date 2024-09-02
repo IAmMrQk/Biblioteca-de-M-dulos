@@ -1,28 +1,14 @@
 package lm.ServicioModulos.web.controladores;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lm.ServicioModulos.modelos.entidad.Usuario;
-import lm.ServicioModulos.servicios.UsuarioService;
 
-@RestController
-//Esto es una API
-@RequestMapping("/Usuarios")
+@RestController // Esto es para definir la clase como que va a manejar solicitudes HTTP, estos
+                // devolverán datos que se serializarán automáticamente en formato JSON
+@RequestMapping("/Usuarios") // Define la URL base para todas las solicitudes manejadas por este controlador
 
 public class UsuarioControlador {
-    
-    @Autowired
-    private UsuarioService usuarioService;
 
-    @GetMapping("/Lista_Usuarios")
-    public List<Usuario> obtenerUsuarios() {
-
-        var usuarios = usuarioService.listarUsuarios();
-        return usuarios;
-    }
 }
+

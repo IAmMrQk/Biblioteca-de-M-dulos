@@ -2,11 +2,12 @@ package lm.ServicioModulos.modelos.entidad;
 
 import java.util.List;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class Carrera {
     private Integer idCarrera;
     private String nombreCarrera;
 
-    @OneToMany
+    @ManyToMany
     private List<Cursos> cursosIntegrados;
     private Integer cantidadSemestre;
     
